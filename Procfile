@@ -1,1 +1,1 @@
-worker: pm2 start haruka.js && pm2 save && pm2 logs
+worker: pm2 start index.js && pm2 save && pm2 logs

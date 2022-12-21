@@ -11,11 +11,12 @@ const axios = require('axios')
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExif, writeExifImg, writeExifVid } = require('./lib/exif')
 const { getRandom, smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
-const express = require ('express')
-let app = express()
-const { createServer } = require ('http')
-let server = createServer(app)
-let _qr = 'invalid'
+const express = require ('express')
+const { toBuffer, toDataURL } = require('qrcode')
+let app = express()
+const { createServer } = require ('http')
+let server = createServer(app)
+let _qr = 'invalid'
 let PORT = 3000 || 8000 || 8080
 
 //require("http").createServer((_, res) => res.end("Uptime!")).listen(8080)
@@ -71,17 +72,28 @@ function title() {
     })
 	haruka.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect, qr} = update	    
-        if (qr){
-          app.use(async (req, res) => {
-        res.setHeader('content-type', 'image/png')
-        res.end(await toBuffer(qr))
-    })
-
-app.use(express.static(path.join(__dirname, 'views')))
-  
-  server.listen(PORT, () => {
-        console.log('App listened on port', PORT)
-  })
+        if (qr){
+
+          app.use(async (req, res) => {
+
+        res.setHeader('content-type', 'image/png')
+
+        res.end(await toBuffer(qr))
+
+    })
+
+
+
+app.use(express.static(path.join(__dirname, 'views')))
+
+  
+
+  server.listen(PORT, () => {
+
+        console.log('App listened on port', PORT)
+
+  })
+
         }
         if (connection === 'close') {
         let reason = new Boom(lastDisconnect?.error)?.output.statusCode

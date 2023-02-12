@@ -1,4 +1,4 @@
-## BACA DULU BANG
+# BACA DULU BANG
 
 > **Warning**: Sc nya gk support termux. [`Klik disini untuk download sc yg support termux`](https://github.com/zeeone-ofc/Haruka-Md#For-Termux)
 
